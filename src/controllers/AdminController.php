@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
-use AdministratorBaseController as Controller;
+use AdministratorBaseController as Controllers;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Request;
@@ -11,14 +11,16 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\File\File as SFile;
 use Illuminate\Support\Facades\Validator as LValidator;
 use Frozennode\Administrator\Fields\Field;
+use BaseController;
 
 /**
  * Handles all requests related to managing the data models
  */
-class AdminController extends Controller
+class AdminController extends Controllers
 {
 
 	protected $layout = "administrator::layouts.default";
@@ -471,19 +473,7 @@ class AdminController extends Controller
 		return Response::JSON(array('success' => true));
 	}
 
-	/**
-	 * The pages view
-	 *
-	 * @return Response
-	 */
-	public function page($page)
-	{
-		//set the page
-		$this->layout->page = $page;
 
-		//set the layout content and title
-		$this->layout->content = View::make($page);
-	}
 
 	/**
 	 * The main view for any of the settings pages
