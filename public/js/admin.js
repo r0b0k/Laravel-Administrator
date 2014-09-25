@@ -31,14 +31,6 @@
 		$dataTable: null,
 
 		/*
-		 * If this is true, the dataTable is scrollable instead of
-		 * skipping columns at the end
-		 *
-		 * @type bool
-		 */
-		dataTableScrollable: false,
-
-		/*
 		 * The pixel points where the columns are hidden
 		 *
 		 * @type object
@@ -297,7 +289,6 @@
 					complete: function()
 					{
 						self.freezeForm(false);
-						window.admin.resizePage();
 					},
 					success: function(response)
 					{
@@ -337,10 +328,6 @@
 					data: {_token: csrf},
 					dataType: 'json',
 					type: 'POST',
-					complete: function()
-					{
-						window.admin.resizePage();
-					},
 					success: function(response)
 					{
 						if (response.success)
@@ -1497,31 +1484,9 @@
 			//resize the page height
 			$('#admin_page').css({minHeight: usedHeight});
 
-			//resize or scroll the data table
-			if (window.admin) {
-				if (! window.admin.dataTableScrollable)
-					window.admin.resizeDataTable();
-				else
-				window.admin.scrollDataTable();
-			}
-		},
-
-		/**
-		 * Allows to scroll wide data tables (alternative to resizeDataTable)
-		 */
-		scrollDataTable: function()
-		{
-			if (!self.$tableContainer)
-			{
-				self.$tableContainer = $('div.table_container');
-				self.$dataTable = self.$tableContainer.find('table.results');
-			}
-
-			// exit if table is already wrapped
-			if (self.$dataTable.parent().hasClass('table_scrollable')) return true;
-
-			// wrap table within div.table_scrollable
-			self.$dataTable.wrap('<div class="table_scrollable"></div>')
+			//resize the data table
+			if (window.admin)
+				window.admin.resizeDataTable();
 		},
 
 		/**

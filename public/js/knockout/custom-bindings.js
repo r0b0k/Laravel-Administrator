@@ -671,8 +671,6 @@
 
 			viewModel[cacheName].bind('FilesAdded', function(up, files) {
 
-				viewModel.freezeActions(true);
-
 				$(files).each(function(i, file) {
 					//parent.uploader.removeFile(file);
 
@@ -711,7 +709,6 @@
 					viewModel[cacheName].splice();
 					viewModel[cacheName].refresh();
 					$('div.plupload').css('z-index', 71);
-					viewModel.freezeActions(false);
 					admin.resizePage();
 				}, 200);
 			});

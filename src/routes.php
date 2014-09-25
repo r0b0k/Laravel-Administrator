@@ -22,6 +22,7 @@ Route::group(array('prefix' => Config::get('administrator::administrator.uri'), 
 		'as' => 'admin_page',
 		'uses' => 'Frozennode\Administrator\AdminController@page'
 	));
+	
 
 	Route::group(array('before' => 'validate_settings|post_validate'), function()
 	{
